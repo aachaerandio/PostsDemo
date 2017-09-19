@@ -28,6 +28,7 @@ ext {
     espressoVersion = "2.2.2"
     retrofitVersion = "2.3.0"
     gsonConverterVersion = "2.3.0"
+    butterKnifeVersion = '8.8.1'
 }
 
 dependencies {
@@ -39,5 +40,8 @@ dependencies {
     compile "com.android.support:support-v4:$androidSupportLibrariesVersion"
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$gsonConverterVersion"
+    compile "com.android.support:recyclerview-v7:$androidSupportLibrariesVersion"
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     testCompile "junit:junit:$jUnitVersion"
 }

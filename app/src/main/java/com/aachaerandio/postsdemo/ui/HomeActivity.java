@@ -15,7 +15,7 @@ public class HomeActivity extends AppCompatActivity {
         setToolBar();
 
         PostsFragment postsFragment = new PostsFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, postsFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, postsFragment).commit();
     }
 
     private void setToolBar() {
