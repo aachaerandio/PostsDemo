@@ -1,5 +1,6 @@
 package com.aachaerandio.postsdemo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.aachaerandio.postsdemo.PostsPresenter;
+import com.aachaerandio.postsdemo.presenter.PostsPresenter;
 import com.aachaerandio.postsdemo.R;
 import com.aachaerandio.postsdemo.model.Post;
 
@@ -21,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class PostsFragment extends Fragment implements PostsPresenter.OnFinishedListener{
+public class PostsFragment extends Fragment implements PostsPresenter.UserInterface {
 
     private PostsPresenter postsPresenter;
 
@@ -44,7 +46,7 @@ public class PostsFragment extends Fragment implements PostsPresenter.OnFinished
         recyclerView.setLayoutManager(layoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-        adapter = new PostsAdapter(posts);
+        adapter = new PostsAdapter(posts, this);
         recyclerView.setAdapter(adapter);
 
         return rootView;
@@ -54,19 +56,22 @@ public class PostsFragment extends Fragment implements PostsPresenter.OnFinished
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         postsPresenter = new PostsPresenter();
-        postsPresenter.loadPosts(this);
+        postsPresenter.setView(this);
+        if(savedInstanceState == null) {
+            postsPresenter.loadPosts();
+        }
     }
 
     @Override
-    public void onFinished(List<Post> posts) {
+    public void showPosts(List<Post> posts) {
         this.posts.clear();
         this.posts.addAll(posts);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onError() {
-
+    public void onPostClicked(Post post) {
+        Toast.makeText(getContext(), "post: "+ post.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

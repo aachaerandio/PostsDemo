@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aachaerandio.postsdemo.presenter.PostsPresenter;
 import com.aachaerandio.postsdemo.R;
 import com.aachaerandio.postsdemo.model.Post;
 
@@ -18,10 +19,12 @@ import butterknife.ButterKnife;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     private List<Post> posts;
+    private final PostsPresenter.UserInterface view;
     private Context context;
 
-    public PostsAdapter(List<Post> posts) {
+    public PostsAdapter(List<Post> posts, PostsPresenter.UserInterface view) {
         this.posts = posts;
+        this.view = view;
     }
 
     @Override
@@ -35,6 +38,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.post = posts.get(position);
         holder.title.setText(holder.post.getTitle());
+        holder.itemView.setOnClickListener(holder);
     }
 
     @Override
@@ -42,7 +46,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return posts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.post_title)
         TextView title;
 
@@ -51,6 +55,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        @Override
+        public void onClick(View view) {
+            PostsAdapter.this.view.onPostClicked(post);
         }
     }
 }

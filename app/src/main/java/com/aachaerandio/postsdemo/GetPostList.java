@@ -11,11 +11,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostsPresenter {
+public class GetPostList {
 
     private PostApiService postApiService;
 
-    public void loadPosts(final OnFinishedListener listener) {
+    public void execute(final FinishedInterface<List<Post>> listener){
         postApiService = new PostApiService();
 
         postApiService.getService().getAllPosts()
@@ -32,11 +32,5 @@ public class PostsPresenter {
                         listener.onError();
                     }
                 });
-    }
-
-    public interface OnFinishedListener {
-        void onFinished(List<Post> items);
-        void onError();
-
     }
 }
