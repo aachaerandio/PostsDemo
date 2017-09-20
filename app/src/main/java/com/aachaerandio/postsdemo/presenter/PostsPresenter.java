@@ -16,8 +16,11 @@ public class PostsPresenter {
         loadPosts();
     }
 
-    public void loadPosts() {
+    public PostsPresenter() {
         getPostList = new GetPostList();
+    }
+
+    public void loadPosts() {
         getPostList.execute(new FinishedInterface<List<Post>>() {
             @Override
             public void onFinished(List<Post> posts) {
@@ -29,6 +32,10 @@ public class PostsPresenter {
 
             }
         });
+    }
+
+    public void setGetPostList(GetPostList getPostList) {
+        this.getPostList = getPostList;
     }
 
     public interface UserInterface {

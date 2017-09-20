@@ -16,6 +16,9 @@ public class Post implements Parcelable {
     @SerializedName("body")
     private String body;
 
+    public Post() {
+    }
+
     public Integer getUserId() {
         return userId;
     }
