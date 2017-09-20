@@ -5,23 +5,25 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Post implements Parcelable {
+public class Comment implements Parcelable {
 
-    @SerializedName("userId")
-    private Integer userId;
+    @SerializedName("postId")
+    private Integer postId;
     @SerializedName("id")
     private Integer id;
-    @SerializedName("title")
-    private String title;
+    @SerializedName("name")
+    private String name;
+    @SerializedName("email")
+    private String email;
     @SerializedName("body")
     private String body;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
     public Integer getId() {
@@ -32,12 +34,20 @@ public class Post implements Parcelable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getBody() {
@@ -48,10 +58,11 @@ public class Post implements Parcelable {
         this.body = body;
     }
 
-    protected Post(Parcel in) {
-        userId = in.readByte() == 0x00 ? null : in.readInt();
+    protected Comment(Parcel in) {
+        postId = in.readByte() == 0x00 ? null : in.readInt();
         id = in.readByte() == 0x00 ? null : in.readInt();
-        title = in.readString();
+        name = in.readString();
+        email = in.readString();
         body = in.readString();
     }
 
@@ -62,11 +73,11 @@ public class Post implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (userId == null) {
+        if (postId == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeInt(userId);
+            dest.writeInt(postId);
         }
         if (id == null) {
             dest.writeByte((byte) (0x00));
@@ -74,20 +85,21 @@ public class Post implements Parcelable {
             dest.writeByte((byte) (0x01));
             dest.writeInt(id);
         }
-        dest.writeString(title);
+        dest.writeString(name);
+        dest.writeString(email);
         dest.writeString(body);
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Post> CREATOR = new Parcelable.Creator<Post>() {
+    public static final Parcelable.Creator<Comment> CREATOR = new Parcelable.Creator<Comment>() {
         @Override
-        public Post createFromParcel(Parcel in) {
-            return new Post(in);
+        public Comment createFromParcel(Parcel in) {
+            return new Comment(in);
         }
 
         @Override
-        public Post[] newArray(int size) {
-            return new Post[size];
+        public Comment[] newArray(int size) {
+            return new Comment[size];
         }
     };
 }

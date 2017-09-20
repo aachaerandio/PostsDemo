@@ -1,6 +1,6 @@
 package com.aachaerandio.postsdemo.ui;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.aachaerandio.postsdemo.presenter.PostsPresenter;
 import com.aachaerandio.postsdemo.R;
@@ -33,6 +32,7 @@ public class PostsFragment extends Fragment implements PostsPresenter.UserInterf
     Unbinder unbinder;
     private PostsAdapter adapter;
     private List<Post> posts = new ArrayList<>();
+    private Callback callback;
 
     public PostsFragment() {
     }
@@ -71,7 +71,7 @@ public class PostsFragment extends Fragment implements PostsPresenter.UserInterf
 
     @Override
     public void onPostClicked(Post post) {
-        Toast.makeText(getContext(), "post: "+ post.getTitle(), Toast.LENGTH_SHORT).show();
+        callback.onPostClicked(post);
     }
 
     @Override
@@ -79,5 +79,22 @@ public class PostsFragment extends Fragment implements PostsPresenter.UserInterf
     {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callback = (Callback) context;
+    }
+
+    @Override
+    public void onDetach() {
+        callback = null;
+        super.onDetach();
+    }
+
+    public interface Callback
+    {
+        void onPostClicked(Post post);
     }
 }

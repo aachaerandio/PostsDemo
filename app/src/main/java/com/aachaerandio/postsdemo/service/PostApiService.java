@@ -1,7 +1,9 @@
 package com.aachaerandio.postsdemo.service;
 
 import com.aachaerandio.postsdemo.BuildConfig;
+import com.aachaerandio.postsdemo.model.Comment;
 import com.aachaerandio.postsdemo.model.Post;
+import com.aachaerandio.postsdemo.model.User;
 
 import java.util.List;
 
@@ -10,6 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class PostApiService {
 
@@ -30,10 +33,10 @@ public class PostApiService {
         Call<List<Post>> getPostById(@Path("id") int id);
 
         @GET("/users/{id}")
-        Call<List<Post>> getUserById(@Path("id") int id);
+        Call<User> getUserById(@Path("id") int id);
 
-        @GET("/comments/{id}")
-        Call<List<Post>> getComentsByPostId(@Path("id") int id);
+        @GET("/comments")
+        Call<List<Comment>> getCommentsByPostId(@Query("postId") int id);
 
     }
 }

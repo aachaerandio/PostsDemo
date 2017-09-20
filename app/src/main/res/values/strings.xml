@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">PostsDemo</string>
     <string name="posts_app">Posts</string>
+    <string name="posts_details">Details</string>
+
+    <plurals name="comments">
+        <item quantity="one">%d Comment</item>
+        <item quantity="other">%d Comments</item>
+    </plurals>
 </resources>
