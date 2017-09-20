@@ -1,7 +1,7 @@
 package com.aachaerandio.postsdemo.presenter;
 
 import com.aachaerandio.postsdemo.FinishedInterface;
-import com.aachaerandio.postsdemo.GetPostList;
+import com.aachaerandio.postsdemo.domain.GetPostList;
 import com.aachaerandio.postsdemo.model.Post;
 import java.util.List;
 

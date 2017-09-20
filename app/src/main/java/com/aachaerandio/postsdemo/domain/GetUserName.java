@@ -1,7 +1,8 @@
-package com.aachaerandio.postsdemo;
+package com.aachaerandio.postsdemo.domain;
 
 import android.support.annotation.NonNull;
 
+import com.aachaerandio.postsdemo.FinishedInterface;
 import com.aachaerandio.postsdemo.model.User;
 import com.aachaerandio.postsdemo.service.PostApiService;
 

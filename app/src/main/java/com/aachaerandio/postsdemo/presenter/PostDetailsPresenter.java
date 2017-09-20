@@ -1,8 +1,8 @@
 package com.aachaerandio.postsdemo.presenter;
 
 import com.aachaerandio.postsdemo.FinishedInterface;
-import com.aachaerandio.postsdemo.GetComments;
-import com.aachaerandio.postsdemo.GetUserName;
+import com.aachaerandio.postsdemo.domain.GetComments;
+import com.aachaerandio.postsdemo.domain.GetUserName;
 import com.aachaerandio.postsdemo.model.Comment;
 import com.aachaerandio.postsdemo.model.Post;
 import com.aachaerandio.postsdemo.model.User;
