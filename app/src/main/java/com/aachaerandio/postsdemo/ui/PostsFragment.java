@@ -75,6 +75,11 @@ public class PostsFragment extends Fragment implements PostsPresenter.UserInterf
     }
 
     @Override
+    public void showErrorMessage() {
+
+    }
+
+    @Override
     public void onDestroyView()
     {
         super.onDestroyView();

@@ -16,9 +16,15 @@ public class GetPostList {
 
     private PostApiService postApiService;
 
-    public void execute(final FinishedInterface<List<Post>> listener){
-        postApiService = new PostApiService();
+    public GetPostList() {
+        this.postApiService = new PostApiService();
+    }
 
+    public void setPostApiService(PostApiService postApiService) {
+        this.postApiService = postApiService;
+    }
+
+    public void execute(final FinishedInterface<List<Post>> listener){
         postApiService.getService().getAllPosts()
                 .enqueue(new Callback<List<Post>>() {
                     @Override

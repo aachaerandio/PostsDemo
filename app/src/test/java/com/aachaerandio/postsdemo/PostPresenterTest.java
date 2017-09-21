@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
@@ -33,7 +34,7 @@ public class PostPresenterTest {
     private Context mockContext;
     @Mock
     private PostsPresenter.UserInterface mockPostListView;
-    @Mock
+    @Spy
     private GetPostList mockGetPostList;
 
     @Before
@@ -78,6 +79,17 @@ public class PostPresenterTest {
 
     @Test
     public void givenLoadPostsFails_WhenInitialising_ThenShowError() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                ((FinishedInterface)invocation.getArguments()[0]).onError();
 
+                return null;
+            }
+        }).when(mockGetPostList).execute(any(FinishedInterface.class));
+
+        postsPresenter.loadPosts();
+
+        verify(mockPostListView, times(1)).showErrorMessage();
     }
 }

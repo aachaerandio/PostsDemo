@@ -16,13 +16,18 @@ import retrofit2.http.Query;
 
 public class PostApiService {
 
+    private PostService postService;
+
+    public PostApiService() {
+        postService = new Retrofit.Builder()
+            .baseUrl(BuildConfig.POST_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PostService.class);
+    }
 
     public PostService getService() {
-        return new Retrofit.Builder()
-                .baseUrl(BuildConfig.POST_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PostService.class);
+        return this.postService;
     }
 
     public interface PostService {

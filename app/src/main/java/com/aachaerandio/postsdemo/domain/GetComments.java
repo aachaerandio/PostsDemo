@@ -16,9 +16,15 @@ public class GetComments {
 
     private PostApiService postApiService;
 
-    public void execute(int postId, final FinishedInterface<List<Comment>> listener){
-        postApiService = new PostApiService();
+    public GetComments() {
+        this.postApiService = new PostApiService();
+    }
 
+    public void setPostApiService(PostApiService postApiService) {
+        this.postApiService = postApiService;
+    }
+
+    public void execute(int postId, final FinishedInterface<List<Comment>> listener){
         postApiService.getService().getCommentsByPostId(postId)
                 .enqueue(new Callback<List<Comment>>() {
                     @Override

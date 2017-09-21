@@ -29,7 +29,7 @@ public class PostsPresenter {
 
             @Override
             public void onError() {
-
+                view.showErrorMessage();
             }
         });
     }
@@ -41,6 +41,7 @@ public class PostsPresenter {
     public interface UserInterface {
         void showPosts(List<Post> posts);
         void onPostClicked(Post post);
+        void showErrorMessage();
 
     }
 }

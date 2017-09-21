@@ -14,9 +14,15 @@ public class GetUserName {
 
     private PostApiService postApiService;
 
-    public void execute(int userId, final FinishedInterface<User> listener){
-        postApiService = new PostApiService();
+    public GetUserName(){
+        this.postApiService = new PostApiService();
+    }
 
+    public void setPostApiService(PostApiService postApiService) {
+        this.postApiService = postApiService;
+    }
+
+    public void execute(int userId, final FinishedInterface<User> listener){
         postApiService.getService().getUserById(userId)
                 .enqueue(new Callback<User>() {
                     @Override
