@@ -46,7 +46,6 @@ public class PostPresenterTest {
     @Test
     public void givenPostsLoaded_WhenInitialising_ThenShowPosts() throws Exception {
 
-        //Given
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
@@ -56,10 +55,8 @@ public class PostPresenterTest {
             }
         }).when(mockGetPostList).execute(any(FinishedInterface.class));
 
-        //When
         postsPresenter.loadPosts();
 
-        //Then
         ArgumentCaptor<List> argumentCaptor = ArgumentCaptor.forClass(ArrayList.class);
         verify(mockPostListView, times(1)).showPosts(argumentCaptor.capture());
 

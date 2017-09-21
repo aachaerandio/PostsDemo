@@ -18,6 +18,9 @@ public class Comment implements Parcelable {
     @SerializedName("body")
     private String body;
 
+    public Comment() {
+    }
+
     public Integer getPostId() {
         return postId;
     }

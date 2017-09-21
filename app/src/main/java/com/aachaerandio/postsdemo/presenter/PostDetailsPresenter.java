@@ -15,13 +15,16 @@ public class PostDetailsPresenter {
     private GetUserName getUserName;
     private GetComments getComments;
 
+    public PostDetailsPresenter() {
+        getUserName = new GetUserName();
+        getComments = new GetComments();
+    }
+
     public void setView(PostDetailsPresenter.UserInterface view) {
         this.view = view;
     }
 
     public void loadDetails(final Post post) {
-        getUserName = new GetUserName();
-        getComments = new GetComments();
         getUserName.execute(post.getUserId(), new FinishedInterface<User>() {
             @Override
             public void onFinished(final User user) {
@@ -43,6 +46,15 @@ public class PostDetailsPresenter {
             }
         });
 
+    }
+
+    public void setGetComments(GetComments getComments) {
+        this.getComments = getComments;
+    }
+
+    public void setGetUserName(GetUserName getUserName) {
+
+        this.getUserName = getUserName;
     }
 
     public interface UserInterface {
